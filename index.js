@@ -2,12 +2,12 @@ var mysql = require('mysql');
 const express = require('express');
 
 //base de dados
-var con = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "curicalinda",
-  database: "hellcode"
-});
+//var con = mysql.createConnection({
+//  host: "localhost",
+//  user: "root",
+//  password: "curicalinda",
+//  database: "hellcode"
+//});
 
 
 
@@ -20,11 +20,12 @@ app.use(express.json({ limit: '1mb' }));
 app.get('/api/listarperguntas', async (request, response) => {
 
 
-  con.query("SELECT * FROM usuarios", function (err, result, fields) {
-    console.log(result);
-    response.json(result);
-  });
+ // con.query("SELECT * FROM usuarios", function (err, result, fields) {
+ //   console.log(result);
+ //   response.json(result);
+ // });
 
+    response.json(result);
 
     
 })

@@ -1,5 +1,5 @@
 var mysql = require('mysql');
-const { pool } = require('pg');
+const { Pool } = require('pg');
 
 const express = require('express');
 

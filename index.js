@@ -1,4 +1,6 @@
 var mysql = require('mysql');
+const { pool } = require('pg');
+
 const express = require('express');
 
 //base de dados
@@ -9,6 +11,12 @@ const express = require('express');
 //  database: "hellcode"
 //});
 
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
+  }
+});
 
 
 const app = express();
@@ -17,6 +25,18 @@ app.listen(port, () => console.log(`Ouvindo na porta ${port}`));
 app.use(express.static('public'));
 app.use(express.json({ limit: '1mb' }));
 
+app.get('/db', async (req, res) => {
+  try {
+    const client = await pool.connect();
+    const result = await client.query('SELECT * FROM duvidas');
+    const results = { 'results': (result) ? result.rows : null};
+    res.render('pages/db', results );
+    client.release();
+  } catch (err) {
+    console.error(err);
+    res.send("Error " + err);
+  }
+})
 app.get('/api/listarperguntas', async (request, response) => {
 
 

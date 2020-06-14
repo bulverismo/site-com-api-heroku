@@ -25,7 +25,7 @@ app.get('/api/listarperguntas', async (request, response) => {
  //   response.json(result);
  // });
 
-    response.json(result);
+    response.json('result');
 
     
 })
